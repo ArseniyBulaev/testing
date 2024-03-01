@@ -11,6 +11,10 @@ TEST(TestGroupName, Subtest_2) {
   std::cout << "continue test after failure" << std::endl;
 }
 
+TEST(TestGroupName, Subset_3){
+    ASSERT_EQ(1, 2);
+}
+
 
 int main(int argc, char **argv)
 {
