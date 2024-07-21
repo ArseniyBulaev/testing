@@ -4,6 +4,6 @@ class Dollar {
 public:
     int amount;
     Dollar(int amount):amount(amount) {}
-    void times(int multiplier);
+    Dollar times(int multiplier) const;
 
 };

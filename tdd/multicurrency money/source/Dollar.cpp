@@ -1,6 +1,6 @@
 #include "Dollar.h"
 
 
-void Dollar::times(int multiplier){
-    amount *= multiplier;
+Dollar Dollar::times(int multiplier) const{
+    return Dollar(amount * multiplier);
 }
