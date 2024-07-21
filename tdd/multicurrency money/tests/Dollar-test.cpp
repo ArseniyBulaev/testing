@@ -11,6 +11,6 @@ TEST(dollarTest, multiplicationTest) {
 }
 
 TEST(dollarTest, equalTest) {
-    EXPECT_TRUE(Dollar(5).equal(Dollar(5)));
-    EXPECT_FALSE(Dollar(5).equal(Dollar(6))); 
+    EXPECT_TRUE(Dollar(5).equals(Dollar(5)));
+    EXPECT_FALSE(Dollar(5).equals(Dollar(6))); 
 }

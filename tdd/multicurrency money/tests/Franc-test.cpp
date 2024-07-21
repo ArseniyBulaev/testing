@@ -11,6 +11,6 @@ TEST(francTest, multiplicationTest) {
 }
 
 TEST(francTest, equalTest) {
-    EXPECT_TRUE(Franc(5).equal(Franc(5)));
-    EXPECT_FALSE(Franc(5).equal(Franc(6))); 
+    EXPECT_TRUE(Franc(5).equals(Franc(5)));
+    EXPECT_FALSE(Franc(5).equals(Franc(6))); 
 }
