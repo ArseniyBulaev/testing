@@ -4,6 +4,6 @@
 
 class Dollar: public Money {
 public:
-    Dollar(int amount): Money(amount) {}
+    Dollar(int amount): Money(amount, std::string("USD")) {}
     Money * times(int multiplier) const;
 };
