@@ -4,14 +4,14 @@
 #include "Dollar.h"
 #include "Franc.h"
 
-Money * Money::dollar(int amount)
+Money Money::dollar(int amount)
 {
-    return new Dollar(amount, std::string("USD"));
+    return Dollar(amount, std::string("USD"));
 }
 
-Money *Money::franc(int amount)
+Money Money::franc(int amount)
 {
-    return new Franc(amount, std::string("CHF"));
+    return Franc(amount, std::string("CHF"));
 }
 
 bool Money::equals(const Money &another) const
@@ -24,9 +24,9 @@ bool Money::operator==(const Money &another) const
     return equals(another);
 }
 
-Money *Money::times(int multiplier) const
+Money Money::times(int multiplier) const
 {
-    return new Money(amount * multiplier, _currency);
+    return Money(amount * multiplier, _currency);
 }
 
 const std::string &Money::currency() const

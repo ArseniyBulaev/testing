@@ -5,13 +5,9 @@
 
 TEST(moneyTest, testCurrency){
     // arrange
-    Money * dollar = Money::dollar(1);
-    Money * franc = Money::franc(2);
-    EXPECT_EQ(std::string("USD"), dollar->currency());
-    EXPECT_EQ(std::string("CHF"), franc->currency());
+    EXPECT_EQ(std::string("USD"), Money::dollar(1).currency());
+    EXPECT_EQ(std::string("CHF"), Money::franc(2).currency());
     // clear
-    delete dollar;
-    delete franc;
 }
 
 TEST(moneyTest, testDifferentClassEquality){
