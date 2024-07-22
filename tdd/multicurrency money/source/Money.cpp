@@ -24,7 +24,7 @@ bool Money::operator==(const Money &another) const
     return equals(another);
 }
 
-const std::string Money::currency() const
+const std::string & Money::currency() const
 {
     return _currency;
 }

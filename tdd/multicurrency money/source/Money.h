@@ -18,7 +18,7 @@ public:
     
     // abstract
     virtual Money * times(int multiplier) const = 0;
-    virtual const std::string currency() const;
+    virtual const std::string & currency() const;
 
 };
 
