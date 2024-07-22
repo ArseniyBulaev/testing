@@ -16,8 +16,7 @@ public:
     bool equals (const Money & another) const;
     bool operator==(const Money & another) const;
     
-    // abstract
-    virtual Money * times(int multiplier) const = 0;
+    virtual Money * times(int multiplier) const;
     virtual const std::string & currency() const;
 
 };

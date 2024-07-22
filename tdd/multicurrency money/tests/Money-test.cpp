@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "Money.h"
+#include "Franc.h"
 #include <string>
 
 TEST(moneyTest, testCurrency){
@@ -11,4 +12,8 @@ TEST(moneyTest, testCurrency){
     // clear
     delete dollar;
     delete franc;
+}
+
+TEST(moneyTest, testDifferentClassEquality){
+    EXPECT_TRUE(Money(10,"CHF").equals(Franc(10, "CHF")));
 }

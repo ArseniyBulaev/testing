@@ -16,7 +16,7 @@ Money *Money::franc(int amount)
 
 bool Money::equals(const Money &another) const
 {
-    return (amount == another.amount) && (typeid(another) == typeid(*this));
+    return (amount == another.amount) && (another._currency == _currency);
 }
 
 bool Money::operator==(const Money &another) const
@@ -24,7 +24,12 @@ bool Money::operator==(const Money &another) const
     return equals(another);
 }
 
-const std::string & Money::currency() const
+Money *Money::times(int multiplier) const
+{
+    return new Money(amount * multiplier, _currency);
+}
+
+const std::string &Money::currency() const
 {
     return _currency;
 }
