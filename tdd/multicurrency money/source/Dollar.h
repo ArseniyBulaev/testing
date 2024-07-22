@@ -1,9 +1,11 @@
 #pragma once
 
+#include <string>
+
 #include "Money.h"
 
 class Dollar: public Money {
 public:
-    Dollar(int amount): Money(amount, std::string("USD")) {}
+    Dollar(int amount, const std::string & currency): Money(amount, currency) {}
     Money * times(int multiplier) const;
 };

@@ -6,12 +6,12 @@
 
 Money * Money::dollar(int amount)
 {
-    return new Dollar(amount);
+    return new Dollar(amount, std::string("USD"));
 }
 
 Money *Money::franc(int amount)
 {
-    return new Franc(amount);
+    return new Franc(amount, std::string("CHF"));
 }
 
 bool Money::equals(const Money &another) const
