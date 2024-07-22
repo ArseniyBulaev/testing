@@ -1,17 +1,15 @@
 #include <typeinfo>
 
 #include "Money.h"
-#include "Dollar.h"
-#include "Franc.h"
 
 Money Money::dollar(int amount)
 {
-    return Dollar(amount, std::string("USD"));
+    return Money(amount, std::string("USD"));
 }
 
 Money Money::franc(int amount)
 {
-    return Franc(amount, std::string("CHF"));
+    return Money(amount, std::string("CHF"));
 }
 
 bool Money::equals(const Money &another) const
