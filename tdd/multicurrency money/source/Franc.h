@@ -5,5 +5,5 @@
 class Franc: public Money {
 public:
     Franc(int amount):Money(amount) {}
-    Franc times(int multiplier) const;
+    Money * times(int multiplier) const;
 };

@@ -1,7 +1,7 @@
 #include "Franc.h"
 
 
-Franc Franc::times(int multiplier) const{
-    return Franc(amount * multiplier);
+Money * Franc::times(int multiplier) const{
+    return new Franc(amount * multiplier);
 }
 

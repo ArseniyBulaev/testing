@@ -5,9 +5,14 @@ TEST(francTest, multiplicationTest) {
     //arrange
     Franc five = Franc(5);
     //act
+    Money * five_times_two = five.times(2);
+    Money * five_time_three = five.times(3);
     //assert
-    EXPECT_EQ (five.times(2), Franc(10));
-    EXPECT_EQ (five.times(3), Franc(15));
+    EXPECT_EQ (*five_times_two, Franc(10));
+    EXPECT_EQ (*five_time_three, Franc(15));
+    //clear
+    delete five_times_two;
+    delete five_time_three;
 }
 
 TEST(francTest, equalTest) {
