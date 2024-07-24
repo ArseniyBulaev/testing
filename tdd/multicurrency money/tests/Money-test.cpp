@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
 #include "Money.h"
+#include "Expression.h"
+#include "Bank.h"
 #include <string>
 
 TEST(moneyTest, testCurrency){
@@ -26,4 +28,13 @@ TEST(moneyTest, equalTest) {
     EXPECT_FALSE(Money::dollar(5).equals(Money::dollar(6))); 
     EXPECT_FALSE(Money::dollar(5).equals(Money::franc(5)));
     //clear
+}
+
+TEST(moneyTest, testSimpleAddition) {
+    //arrange
+    Money five = Money::dollar(5);
+    Expression sum = five.plus(five);
+    Bank bank;
+    Money reduced = bank.reduce(sum, "USD");
+    EXPECT_EQ(reduced, Money::dollar(10));    
 }

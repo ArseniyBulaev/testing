@@ -31,3 +31,8 @@ const std::string &Money::currency() const
 {
     return _currency;
 }
+
+Expression Money::plus(const Money &addend) const
+{
+    return Money(amount + addend.amount, _currency);
+}

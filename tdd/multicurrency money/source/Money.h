@@ -1,8 +1,9 @@
 #pragma once
 #include <string>
 
+#include "Expression.h"
 
-class Money
+class Money: public Expression
 {
 protected:
     int amount;
@@ -18,6 +19,8 @@ public:
     
     virtual Money times(int multiplier) const;
     virtual const std::string & currency() const;
+
+    Expression plus(const Money & addend) const;
 
 };
 
