@@ -1,6 +1,7 @@
 #include <typeinfo>
 
 #include "Money.h"
+#include "Sum.h"
 
 Money Money::dollar(int amount)
 {
@@ -32,7 +33,12 @@ const std::string &Money::currency() const
     return _currency;
 }
 
-Expression Money::plus(const Money &addend) const
+Expression * Money::plus(const Money &addend) const
 {
-    return Money(amount + addend.amount, _currency);
+    return new Sum(*this, addend);
+}
+
+Money Money::reduce(const std::string &to) const
+{
+    return *this;
 }

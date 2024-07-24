@@ -6,9 +6,9 @@
 class Money: public Expression
 {
 protected:
-    int amount;
     const std::string _currency;
 public:
+    int amount;
     // factory
     static Money dollar(int amount);
     static Money franc(int amount);
@@ -20,7 +20,8 @@ public:
     virtual Money times(int multiplier) const;
     virtual const std::string & currency() const;
 
-    Expression plus(const Money & addend) const;
+    Expression * plus(const Money & addend) const;
+    Money reduce(const std::string & to) const override;
 
 };
 

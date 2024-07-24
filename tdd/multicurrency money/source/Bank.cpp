@@ -1,6 +1,9 @@
 #include "Bank.h"
+#include "Sum.h"
 
-Money Bank::reduce(Expression source, const std::string &to) const
+#include <typeinfo>
+
+Money Bank::reduce(const Expression & source, const std::string &to) const
 {
-    return Money::dollar(10);
+    return source.reduce(to);
 }

@@ -8,5 +8,5 @@
 class Bank
 {
 public:
-    Money reduce(Expression source, const std::string & to) const;
+    Money reduce(const Expression & source, const std::string & to) const;
 };
