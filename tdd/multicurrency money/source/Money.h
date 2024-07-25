@@ -2,6 +2,7 @@
 #include <string>
 
 #include "Expression.h"
+#include "Bank.h"
 
 class Money: public Expression
 {
@@ -21,7 +22,7 @@ public:
     virtual const std::string & currency() const;
 
     Expression * plus(const Money & addend) const;
-    Money reduce(const std::string & to) const override;
+    Money reduce(const Bank & bank, const std::string & to) const override;
 
 };
 

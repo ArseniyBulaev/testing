@@ -66,3 +66,10 @@ TEST(moneyTest, testReduceMoney){
     Money reduced = bank.reduce(Money::dollar(1), "USD");
     EXPECT_EQ(reduced, Money::dollar(1));
 }
+
+TEST(moneyTest, reduceMoneyDifferentCurrency){
+    Bank bank;
+    bank.addRate("CHF", "USD", 2);
+    Money result = bank.reduce(Money::franc(2), "USD");
+    EXPECT_EQ(result, Money::dollar(1));
+}

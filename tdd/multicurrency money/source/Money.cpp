@@ -38,7 +38,8 @@ Expression * Money::plus(const Money &addend) const
     return new Sum(*this, addend);
 }
 
-Money Money::reduce(const std::string &to) const
+Money Money::reduce(const Bank & bank, const std::string &to) const
 {
-    return *this;
+    int rate = bank.rate(_currency, to);
+    return Money(amount/rate, to);
 }

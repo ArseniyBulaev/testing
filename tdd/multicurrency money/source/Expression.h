@@ -3,9 +3,10 @@
 #include <string>
 
 class Money;
+class Bank;
 
 class Expression {
 public:
     virtual ~Expression() = default;
-    virtual Money reduce(const std::string & to) const = 0;
+    virtual Money reduce(const Bank & bank, const std::string & to) const = 0;
 };

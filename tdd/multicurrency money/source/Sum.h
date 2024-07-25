@@ -10,5 +10,5 @@ public:
     Money augend;
     Money addend;
     Sum(Money augend, Money addend):augend(augend), addend(addend) {}
-    Money reduce(const std::string & to) const override;
+    Money reduce(const Bank & bank, const std::string & to) const override;
 };
