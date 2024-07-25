@@ -67,9 +67,14 @@ TEST(moneyTest, testReduceMoney){
     EXPECT_EQ(reduced, Money::dollar(1));
 }
 
-TEST(moneyTest, reduceMoneyDifferentCurrency){
+TEST(moneyTest, testreduceMoneyDifferentCurrency){
     Bank bank;
     bank.addRate("CHF", "USD", 2);
     Money result = bank.reduce(Money::franc(2), "USD");
     EXPECT_EQ(result, Money::dollar(1));
+}
+
+TEST(moneyTest, testIdentityRate){
+    Bank bank;
+    EXPECT_EQ(1, bank.rate("USD", "USD"));
 }
