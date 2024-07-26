@@ -23,9 +23,9 @@ bool Money::operator==(const Money &another) const
     return equals(another);
 }
 
-Money Money::times(int multiplier) const
+Expression * Money::times(int multiplier) const
 {
-    return Money(amount * multiplier, _currency);
+    return new Money(amount * multiplier, _currency);
 }
 
 const std::string &Money::currency() const
@@ -33,7 +33,7 @@ const std::string &Money::currency() const
     return _currency;
 }
 
-Expression * Money::plus(const Money &addend) const
+Expression * Money::plus(Expression &addend) 
 {
     return new Sum(*this, addend);
 }
