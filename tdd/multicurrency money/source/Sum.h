@@ -12,4 +12,5 @@ public:
     Sum(Expression & augend, Expression & addend):augend(augend), addend(addend) {}
     Money reduce(const Bank & bank, const std::string & to) const override;
     Expression * plus(Expression & addend) override;
+    Expression * times(int multiplier) const override;
 };

@@ -10,5 +10,10 @@ Money Sum::reduce(const Bank & bank, const std::string &to) const
 
 Expression *Sum::plus(Expression &addend) 
 {
-    return nullptr;
+    return new Sum(*this, addend);
+}
+
+Expression *Sum::times(int multiplier) const
+{
+    return new Sum(*augend.times(multiplier), *addend.times(multiplier));
 }

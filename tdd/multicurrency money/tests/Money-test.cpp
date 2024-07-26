@@ -96,3 +96,40 @@ TEST(moneyTest, testMixedAddition){
     Money result = bank.reduce(*(fiveBucks_ex->plus(*tenFranks_ex)), "USD");
     EXPECT_EQ(Money::dollar(10), result);
 }
+
+TEST(moneyTest, testSumPlusMoney){
+    //arrange
+    Money fiveBucks = Money::dollar(5);
+    Money tenFranks = Money::franc(10);
+    Expression * fiveBucks_ex = &fiveBucks;
+    Expression * tenFranks_ex = &tenFranks;
+    Bank bank;
+    bank.addRate("CHF", "USD", 2);
+    Expression * sum = new Sum(*fiveBucks_ex, *tenFranks_ex);
+    Expression * sum_plus_five = sum->plus(*fiveBucks_ex);
+    Money reduced = sum_plus_five->reduce(bank, "USD");
+    //assert
+    EXPECT_EQ(reduced, Money::dollar(15));
+    //clear
+    delete sum;
+    delete sum_plus_five;
+}
+
+TEST(moneyTest, testSumTimes){
+    //arrange
+    Money fiveBucks = Money::dollar(5);
+    Money tenFranks = Money::franc(10);
+    Expression * fiveBucks_ex = &fiveBucks;
+    Expression * tenFranks_ex = &tenFranks;
+    Bank bank;
+    bank.addRate("CHF", "USD", 2);
+    Expression * sum = new Sum(*fiveBucks_ex, *tenFranks_ex);
+    Expression * sum_times_two = sum->times(2);
+    Money reduced = sum_times_two->reduce(bank, "USD");
+    //assert
+    EXPECT_EQ(reduced, Money::dollar(20));
+    //clear
+    delete sum;
+    delete sum_times_two;   
+
+}

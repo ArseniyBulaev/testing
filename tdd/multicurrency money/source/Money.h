@@ -18,7 +18,7 @@ public:
     bool equals (const Money & another) const;
     bool operator==(const Money & another) const;
     
-    virtual Expression * times(int multiplier) const;
+    virtual Expression * times(int multiplier) const override;
     virtual const std::string & currency() const;
 
     Expression * plus(Expression & addend)  override;
