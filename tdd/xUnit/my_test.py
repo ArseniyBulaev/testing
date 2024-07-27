@@ -3,28 +3,30 @@ class testCase:
         self.name = name
     def setUp(self):
         pass
+    def tearDown(self):
+        pass
     def run(self):
         self.setUp()
-        method = getattr(self, self.name)
-        method()
+        exec("self." + self.name + "()")
+        self.tearDown()
 
 
 class wasRun(testCase):
     def __init__(self, name) -> None:
         testCase.__init__(self, name)
     def testMethod(self):
-        self.wasRun = 1
+        self.log += "testMethod "
     def setUp(self):
-        self.wasRun = None
-        self.wasSetUp = 1
+        self.log = "setUp "
+    def tearDown(self):
+         self.log += "tearDown "
+
 
 
 class TestCaseTest(testCase):
     def setUp(self):
+       pass
+    def testTemplateMethod(self):
         self.test = wasRun("testMethod")
-    def testRunning(self):
         self.test.run()
-        assert(self.test.wasRun)
-    def testSetUp(self):
-        self.test.run()
-        assert(self.test.wasSetUp)
+        assert("setUp testMethod tearDown " == self.test.log)
