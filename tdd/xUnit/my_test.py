@@ -11,9 +11,9 @@ class testCase:
         self.setUp()
         try:
             exec("self." + self.name + "()")
-            self.tearDown()
         except:
             result.testFailed()
+        self.tearDown()
         return result
 
 
