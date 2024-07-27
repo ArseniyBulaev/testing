@@ -9,8 +9,11 @@ class testCase:
         result = TestResult()
         result.testStarted()
         self.setUp()
-        exec("self." + self.name + "()")
-        self.tearDown()
+        try:
+            exec("self." + self.name + "()")
+            self.tearDown()
+        except:
+            result.testFailed()
         return result
 
 
@@ -43,11 +46,19 @@ class TestCaseTest(testCase):
         self.test = wasRun("testBrokenMethod")
         result = self.test.run()
         assert("1 run, 1 failed" == result.summary())
+    def testFailedResultFormating(self):
+        result = TestResult()
+        result.testStarted()
+        result.testFailed()
+        assert("1 run, 1 failed" == result.summary())
 
 class TestResult():
     def __init__(self):
         self.runCount = 0
+        self.errorCount = 0
     def testStarted(self):
-        self.runCount += 1 
+        self.runCount += 1
+    def testFailed(self):
+        self.errorCount += 1 
     def summary(self):
-        return "%d run, 0 failed" % self.runCount
+        return "%d run, %d failed" % (self.runCount, self.errorCount)
