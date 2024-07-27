@@ -1,10 +1,10 @@
 from my_test import *
 
 def main():
-    TestCaseTest("testTemplateMethod").run()
-    TestCaseTest("testResult").run()
-    TestCaseTest("testFailedResult").run()
-    TestCaseTest("testFailedResultFormating").run()
+    print(TestCaseTest("testTemplateMethod").run().summary())
+    print(TestCaseTest("testResult").run().summary())
+    print(TestCaseTest("testFailedResult").run().summary())
+    print(TestCaseTest("testFailedResultFormating").run().summary())
 
 if __name__ == "__main__":
     main()
