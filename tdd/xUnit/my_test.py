@@ -5,16 +5,15 @@ class testCase:
         pass
     def tearDown(self):
         pass
-    def run(self):
-        result = TestResult()
+    def run(self, result):
         result.testStarted()
         self.setUp()
         try:
-            exec("self." + self.name + "()")
+            method = getattr(self, self.name)
+            method()
         except:
             result.testFailed()
         self.tearDown()
-        return result
 
 
 class wasRun(testCase):
@@ -33,24 +32,29 @@ class wasRun(testCase):
 
 class TestCaseTest(testCase):
     def setUp(self):
-       pass
+       self.result = TestResult()
     def testTemplateMethod(self):
         self.test = wasRun("testMethod")
-        self.test.run()
+        self.test.run(self.result)
         assert("setUp testMethod tearDown " == self.test.log)
     def testResult(self):
         self.test = wasRun("testMethod")
-        result = self.test.run()
-        assert("1 run, 0 failed" == result.summary())
+        result = self.test.run(self.result)
+        assert("1 run, 0 failed" == self.result.summary())
     def testFailedResult(self):
         self.test = wasRun("testBrokenMethod")
-        result = self.test.run()
-        assert("1 run, 1 failed" == result.summary())
+        self.test.run(self.result)
+        assert("1 run, 1 failed" == self.result.summary())
     def testFailedResultFormating(self):
-        result = TestResult()
-        result.testStarted()
-        result.testFailed()
-        assert("1 run, 1 failed" == result.summary())
+        self.result.testStarted()
+        self.result.testFailed()
+        assert("1 run, 1 failed" == self.result.summary())
+    def testSuite(self):
+        suite = TestSuite()
+        suite.add(wasRun("testMethod"))
+        suite.add(wasRun("testBrokenMethod"))
+        suite.run(self.result)
+        assert("2 run, 1 failed" == self.result.summary())
 
 class TestResult():
     def __init__(self):
@@ -62,3 +66,13 @@ class TestResult():
         self.errorCount += 1 
     def summary(self):
         return "%d run, %d failed" % (self.runCount, self.errorCount)
+
+
+class TestSuite():
+    def __init__(self):
+        self.tests = []
+    def add(self, test):
+        self.tests.append(test)
+    def run(self, result):
+        for test in self.tests:
+            test.run(result)
