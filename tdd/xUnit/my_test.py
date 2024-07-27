@@ -55,6 +55,11 @@ class TestCaseTest(testCase):
         suite.add(wasRun("testBrokenMethod"))
         suite.run(self.result)
         assert("2 run, 1 failed" == self.result.summary())
+    def testTearDownAfterFail(self):
+        self.test = wasRun("testBrokenMethod")
+        self.test.run(self.result)
+        assert("setUp testBrokenMethod tearDown")
+        assert("1 run, 1 failed" == self.result.summary())
 
 class TestResult():
     def __init__(self):

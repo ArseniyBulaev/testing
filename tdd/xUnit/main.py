@@ -7,6 +7,7 @@ def main():
     suit.add(TestCaseTest("testFailedResult"))
     suit.add(TestCaseTest("testFailedResultFormating"))
     suit.add(TestCaseTest("testSuite"))
+    suit.add(TestCaseTest("testTearDownAfterFail"))
     result = TestResult()
     suit.run(result)
     print(result.summary())
