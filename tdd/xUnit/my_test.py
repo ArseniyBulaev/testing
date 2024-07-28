@@ -1,3 +1,5 @@
+import inspect
+
 class testCase:
     def __init__(self, name) -> None:
         self.name = name
@@ -56,9 +58,7 @@ class TestCaseTest(testCase):
         self.result.testFailed()
         assert("1 run, 1 failed" == self.result.summary())
     def testSuite(self):
-        suite = TestSuite()
-        suite.add(wasRun("testMethod"))
-        suite.add(wasRun("testBrokenMethod"))
+        suite = TestSuite(wasRun)
         suite.run(self.result)
         assert("2 run, 1 failed" == self.result.summary())
     def testTearDownAfterFail(self):
@@ -72,11 +72,11 @@ class TestCaseTest(testCase):
         assert("setUp error" == self.result.errors())
         assert("1 run, 1 failed" == self.result.summary())
 
+
 class hasErrorInSetUp(testCase):
     def __init__(self, name) -> None:
         super().__init__(name)
     def setUp(self):
-        pass
         raise Exception("setUp error")
 
 
@@ -98,10 +98,15 @@ class TestResult():
 
 
 class TestSuite():
-    def __init__(self):
+    def __init__(self, testCaseInstance=None):
         self.tests = []
-    def add(self, test):
-        self.tests.append(test)
+        self.testCaseInstance = testCaseInstance
+        self.__extractTests__()
+    def __extractTests__(self):
+        testCaseFunctions = inspect.getmembers(self.testCaseInstance, predicate=inspect.isfunction)
+        for testCaseFunctionName, testCaseFunction in testCaseFunctions:
+            if(testCaseFunctionName.startswith("test")):
+                self.tests.append(self.testCaseInstance(testCaseFunctionName))
     def run(self, result):
         for test in self.tests:
             test.run(result)
