@@ -1,6 +1,8 @@
 class testCase:
     def __init__(self, name) -> None:
         self.name = name
+    def __repr__(self) -> str:
+        return self.name
     def setUp(self):
         pass
     def tearDown(self):
@@ -33,6 +35,8 @@ class wasRun(testCase):
 
 
 class TestCaseTest(testCase):
+    def __repr__(self) -> str:
+        return super().__str__()
     def setUp(self):
        self.result = TestResult()
     def testTemplateMethod(self):
