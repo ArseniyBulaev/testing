@@ -8,9 +8,11 @@ def main():
     suit.add(TestCaseTest("testFailedResultFormating"))
     suit.add(TestCaseTest("testSuite"))
     suit.add(TestCaseTest("testTearDownAfterFail"))
+    suit.add(TestCaseTest("testCatchSetUpError"))
     result = TestResult()
     suit.run(result)
     print(result.summary())
+    print(result.errors())
 
 
 if __name__ == "__main__":

@@ -7,11 +7,12 @@ class testCase:
         pass
     def run(self, result):
         result.testStarted()
-        self.setUp()
         try:
+            self.setUp()
             method = getattr(self, self.name)
             method()
-        except:
+        except Exception as e:
+            result.saveErrorMessage(str(e))
             result.testFailed()
         self.tearDown()
 
@@ -61,15 +62,33 @@ class TestCaseTest(testCase):
         self.test.run(self.result)
         assert("setUp testBrokenMethod tearDown " == self.test.log)
         assert("1 run, 1 failed" == self.result.summary())
+    def testCatchSetUpError(self):
+        self.test = hasErrorInSetUp("testCatchSetUpError")
+        self.test.run(self.result)
+        assert("setUp error" == self.result.errors())
+        assert("1 run, 1 failed" == self.result.summary())
+
+class hasErrorInSetUp(testCase):
+    def __init__(self, name) -> None:
+        super().__init__(name)
+    def setUp(self):
+        pass
+        raise Exception("setUp error")
+
 
 class TestResult():
     def __init__(self):
         self.runCount = 0
         self.errorCount = 0
+        self.errorMessages = []
     def testStarted(self):
         self.runCount += 1
     def testFailed(self):
-        self.errorCount += 1 
+        self.errorCount += 1
+    def saveErrorMessage(self, errorMessage):
+        self.errorMessages.append(errorMessage) 
+    def errors(self):
+        return "\n".join(self.errorMessages)
     def summary(self):
         return "%d run, %d failed" % (self.runCount, self.errorCount)
 
